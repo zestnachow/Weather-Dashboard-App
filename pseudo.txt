@@ -1,0 +1,13 @@
+- on initial page load, display header, search, and forecast for Denver
+- when user enters a city and clicks submit, user input is grabbed and event listener on submit button kicks off function
+
+- first fetch request: take user input (city name) and get coordinates/current weather
+- second fetch request: take coordinates and get weather forecast 
+
+- dynamically generate bootstrap cards for each of the five upcoming days  
+
+-display current weather somewhere
+
+- update text content of various dynamically generated elements within those cards to the weather info we're grabbing from the second fetch request
+
+- setting localStorage with all relevant weather data, retrieving and updating cards with those values so they display when user reopens the app and sees the results of their last search
