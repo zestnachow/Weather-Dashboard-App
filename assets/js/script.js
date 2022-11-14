@@ -14,8 +14,6 @@ function getWeather() {
         console.log(lat);
         let lon = res.coord.lon;
         console.log(lon);
-        let cityId = res.id;
-        console.log(cityId);
         getForecast(lat, lon);
     })
 }
