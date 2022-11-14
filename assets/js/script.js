@@ -3,8 +3,6 @@ const submitButton = $("#submit-btn");
 const APIKey = "63eb4bcc2085291b819482f284bc9b49";
 
 
-
-
 // functions
 function getWeather() {
     let userInput = $("#user-input").val(); 
@@ -18,21 +16,19 @@ function getWeather() {
         console.log(lon);
         let cityId = res.id;
         console.log(cityId);
-        getForecast(cityId);
+        getForecast(lat, lon);
     })
 }
 
-function getForecast(cityId) {
+function getForecast(lat, lon) {
     $.ajax({
-        url:  "https://api.openweathermap.org/data/2.5/forecast?id=" + cityId + "&appid=" + APIKey + "&units=imperial",
+        url:  "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=imperial",
     }).then(function (res) {
         console.log(res);
     })
 }
 
-function convertTemp(K) {
-    return ((K-273.15)*9)/5 + 32;
-}
+
 
 
 // event listeners
