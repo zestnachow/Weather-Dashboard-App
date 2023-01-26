@@ -1,19 +1,34 @@
 // variable declarations
 const submitButton = $("#submit-btn");
 const APIKey = "63eb4bcc2085291b819482f284bc9b49";
+const cityName = $("#city-name");
+const currentTemp = $("#current-temp");
+const currentHumidity = $("#current-humidity");
+const currentWind = $("#current-wind");
+const currentUv = $("#current-UV");
 
 
 // functions
-function getWeather() {
-    let userInput = $("#user-input").val(); 
+function getWeather(city) {
     $.ajax({
-        url: "https://api.openweathermap.org/data/2.5/weather?q=" + userInput + "&appid=" + APIKey + "&units=imperial",
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=imperial",
     }).then(function (res) {
         console.log(res);
+        let currentDate = dayjs().format("M-D-YYYY");
+        cityName.text(res.name + " " + "(" + currentDate + ")");
+        $("#current-weather-favicon").attr("src", "https://openweathermap.org/img/wn/" + res.weather[0].icon + "@2x.png").attr("alt", res.weather[0].description);
+        currentTemp.text("Temperature: " + Math.round(res.main.temp) + "\u00B0F")
+        currentWind.text("Wind speed: " + Math.round(res.wind.speed) + " mph");
+        currentHumidity.text("Humidity: " + res.main.humidity + "%");
         let lat = res.coord.lat;
-        console.log(lat);
         let lon = res.coord.lon;
-        console.log(lon);
+        let UVquery = "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+        $.ajax({
+            url: UVquery,
+        }).then(function (res) {
+            console.log(res);
+            currentUv.text("UV Index: " + res[0].value);
+        })
         getForecast(lat, lon);
     })
 }
@@ -33,6 +48,7 @@ function getForecast(lat, lon) {
 
 submitButton.on("click", function(event) {
     event.preventDefault();
-    getWeather();
+    let city = $("#user-input").val(); 
+    getWeather(city);
 })
 
