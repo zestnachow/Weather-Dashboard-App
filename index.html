@@ -10,7 +10,7 @@
     <title>Weather Dashboard App</title>
 </head>
 <body>
-    <header class="container-fluid text-center text-white bg-dark p-3">
+    <header class="navbar container-fluid text-center text-white p-3">
         <h1>Weather Dashboard</h1>
     </header>
     <main class="container-fluid w-100">
@@ -19,14 +19,29 @@
                 <h2>Search for a city:</h2>
                 <form id="city-search-form">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="user-input" name="user-input">
+                        <input type="text" class="form-control" id="user-input" name="user-input" placeholder="Search city">
                     </div>
                     <button type="button"
-                    class="btn btn-primary mt-2 bg-dark"  id="submit-btn">Search</button>
+                    class="btn btn-primary mt-3 bg-dark"  id="submit-btn">Search</button>
                 </form>
             </aside>
-            <section  class="col-9 bg-secondary border border-secondary" id="current-forecast">
+            <section  class="col-9 bg-secondary border border-dark mt-3" id="current-forecast">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <span id="city-name" class="text-light align-middle">City</span>
+                                <img src="" alt="">
+                            </div>
+                        </div>
+                        <div class="row"></div>
+                        <div class="row"></div>
+                        <div class="row"></div>
+                        <div class="row"></div>
 
+                    </div>
+                    
+                </div>
             </section>
         </div>
     </main>
