@@ -27,7 +27,19 @@ function getWeather(city) {
             url: UVquery,
         }).then(function (res) {
             console.log(res);
-            currentUv.text("UV Index: " + res[0].value);
+            currentUv.text("UV Index (Scale: Low (green) · Moderate (yellow) · High (orange) · Very High (red) · Extreme (purple) : " + res[0].value);
+            if (res[0].value <= 2.99) {
+                currentUv.css("color", "green");
+            } else if (res[0].value <= 5.99) {
+                currentUv.css("color", "yellow");
+            } else if (res[0].value <= 7.99) {
+                currentUv.css("color", "orange");
+            } else if (res[0].value <= 10.99) {
+                currentUv.css("color", "red");
+            } else {
+                currentUv.css("color", "purple");
+            }
+
         })
         getForecast(lat, lon);
     })

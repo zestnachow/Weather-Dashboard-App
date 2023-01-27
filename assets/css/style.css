@@ -1,4 +1,4 @@
-.navbar-brand, #current-forecast, #submit-btn {
+.navbar-brand, #current-forecast, #submit-btn, .fiveday {
     background-color: #4158D0;
     background-image: linear-gradient(to right, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 }
@@ -9,3 +9,6 @@
 #city-name {
     font-size: 1.8rem;
 }
+
+
+

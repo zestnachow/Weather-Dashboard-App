@@ -14,7 +14,7 @@
     </header>
     <main class="container-fluid w-100">
         <div class="row">
-            <aside class="col-3">
+            <aside class="col-3 bg-light">
                 <h2>Search for a city:</h2>
                 <form id="city-search-form">
                     <div class="form-group">
@@ -24,9 +24,9 @@
                     class="btn btn-primary mt-3"  id="submit-btn">Search</button>
                 </form>
             </aside>
-            <section  class="col-9 bg-info border border-dark mt-3" id="current-forecast">
-                <div class="row">
-                    <div class="col-12">
+            <section  class="col-9">
+                <div class="row mr-0">
+                    <div class="col-12 border border-dark mt-0 rounded" id="current-forecast">
                         <div class="row">
                             <div class="col-12">
                                 <span id="city-name" class="text-light align-middle"></span>
@@ -43,12 +43,25 @@
                             <h3 id="current-wind" class="text-light"></h3>
                         </div>
                         <div class="row">
-                            <h3 id="current-UV" class="text-light"></h3>
+                            <h3 id="current-UV">
+                            </h3>
                         </div>
                     </div>
-                    
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <h3>Five Day Forecast</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mx-3 rounded text-light fiveday"></div>
+                    <div class="col mx-3 rounded text-light fiveday"></div>
+                    <div class="col mx-3 rounded text-light fiveday"></div>
+                    <div class="col mx-3 rounded text-light fiveday"></div>
+                    <div class="col mx-3 rounded text-light fiveday"></div>
                 </div>
             </section>
+
         </div>
     </main>
 
