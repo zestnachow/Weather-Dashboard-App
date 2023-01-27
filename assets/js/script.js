@@ -19,9 +19,9 @@ function getWeather(city) {
         let currentDate = dayjs().format("M-D-YYYY");
         cityName.text(res.name + " " + "(" + currentDate + ")");
         $("#current-weather-favicon").attr("src", "https://openweathermap.org/img/wn/" + res.weather[0].icon + "@2x.png").attr("alt", res.weather[0].description);
-        currentTemp.text("Temperature: " + Math.round(res.main.temp) + "\u00B0F")
-        currentWind.text("Wind speed: " + Math.round(res.wind.speed) + " mph");
-        currentHumidity.text("Humidity: " + res.main.humidity + "%");
+        currentTemp.text("Current temperature: " + Math.round(res.main.temp) + "\u00B0F")
+        currentWind.text("Current wind speed: " + Math.round(res.wind.speed) + " MPH");
+        currentHumidity.text("Current humidity: " + res.main.humidity + "%");
         let lat = res.coord.lat;
         let lon = res.coord.lon;
         let UVquery = "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
@@ -29,7 +29,7 @@ function getWeather(city) {
             url: UVquery,
         }).then(function (res) {
             console.log(res);
-            currentUv.text("UV Index (Scale: Low (green) · Moderate (yellow) · High (orange) · Very High (red) · Extreme (purple) : " + res[0].value);
+            currentUv.text("Current UV Index (Scale: Low (green) · Moderate (yellow) · High (orange) · Very High (red) · Extreme (purple) : " + res[0].value);
             if (res[0].value <= 2.99) {
                 currentUv.css("color", "green");
             } else if (res[0].value <= 5.99) {
@@ -41,7 +41,6 @@ function getWeather(city) {
             } else {
                 currentUv.css("color", "purple");
             }
-
         })
         getForecast(lat, lon);
     })
@@ -55,18 +54,23 @@ function getForecast(lat, lon) {
         console.log(res);
         const forecastBoxes = $(".fiveday");
         for (let i = 0; i < forecastBoxes.length; i++) {
-
+            const index = i * 8 + 4;
+            $("#forecast-date-day-" + i).attr("class", "text-light").text(res.list[index].dt_txt);
+            $("#forecast-icon-day-" + i).attr("src", "https://openweathermap.org/img/wn/" + res.list[index].weather[0].icon + "@2x.png").attr("alt", res.list[index].weather[0].description);
+            $("#forecast-temp-day-" + i).attr("class", "text-light").text("Temperature: " + Math.round(res.list[index].main.temp) + "\u00B0F").css("display", "block");
+            $("#forecast-wind-day-" + i).attr("class", "text-light").text("Wind speed: " + Math.round(res.list[index].wind.speed) + " MPH").css("display", "block");
+            $("#forecast-humidity-day-" + i).attr("class", "text-light").text("Humidity: " + res.list[index].main.humidity + "%").css("display", "block");
         }
     })
 }
 
+// create new buttons based on user input
 function previousSearchButtons(city) {
         const previousSearchButton = $("<button>").attr("type", "button").attr("class", "btn btn-primary mt-3 history-btn").text(city).click(function() {
             getWeather(previousSearchButton.text())
         });
         $("#city-search-form").append(previousSearchButton);
 }
-
 
 // search button event listener
 submitButton.on("click", function(event) {
