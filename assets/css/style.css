@@ -1,4 +1,4 @@
-.navbar-brand, #current-forecast, #submit-btn, .fiveday {
+.navbar-brand, #current-forecast, #submit-btn, #clear-btn, .history-btn, .fiveday {
     background-color: #4158D0;
     background-image: linear-gradient(to right, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 }
@@ -10,5 +10,7 @@
     font-size: 1.8rem;
 }
 
-
+#clear-btn, .history-btn {
+    display: block;
+}
 

@@ -1,14 +1,16 @@
 // variable declarations
 const submitButton = $("#submit-btn");
+const clearButton = $("#clear-btn");
 const APIKey = "63eb4bcc2085291b819482f284bc9b49";
 const cityName = $("#city-name");
 const currentTemp = $("#current-temp");
 const currentHumidity = $("#current-humidity");
 const currentWind = $("#current-wind");
 const currentUv = $("#current-UV");
+let previousSearches = JSON.parse(localStorage.getItem("search")) || [];
 
 
-// functions
+// retrieve current forecast for searched city
 function getWeather(city) {
     $.ajax({
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=imperial",
@@ -45,22 +47,41 @@ function getWeather(city) {
     })
 }
 
+// retrieve five day forecast for searched city
 function getForecast(lat, lon) {
     $.ajax({
         url:  "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=imperial",
     }).then(function (res) {
         console.log(res);
+        const forecastBoxes = $(".fiveday");
+        for (let i = 0; i < forecastBoxes.length; i++) {
+
+        }
     })
 }
 
+function previousSearchButtons(city) {
+        const previousSearchButton = $("<button>").attr("type", "button").attr("class", "btn btn-primary mt-3 history-btn").text(city).click(function() {
+            getWeather(previousSearchButton.text())
+        });
+        $("#city-search-form").append(previousSearchButton);
+}
 
 
-
-// event listeners
-
+// search button event listener
 submitButton.on("click", function(event) {
     event.preventDefault();
     let city = $("#user-input").val(); 
     getWeather(city);
+    previousSearches.push(city);
+    localStorage.setItem("search", JSON.stringify(previousSearches));
+    previousSearchButtons(city);
+})
+
+// clear search history button event listener
+clearButton.on("click", function(event) {
+    event.preventDefault();
+    localStorage.removeItem("search");
+    $(".history-btn").remove();
 })
 
